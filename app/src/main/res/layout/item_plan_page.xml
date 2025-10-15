@@ -6,92 +6,99 @@
 
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center_horizontal"
         android:padding="16dp">
 
-        <!-- Top Image -->
         <ImageView
             android:id="@+id/ivPlanImage"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="200dp"
-            android:src="@drawable/image"
             android:scaleType="fitCenter"
-            android:contentDescription="@string/plan_image" />
+            android:src="@drawable/image"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-        <!-- Plan Card -->
         <LinearLayout
             android:id="@+id/planCard"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@drawable/bg_dummy_new"
-            android:layout_marginTop="16dp"
             android:padding="20dp"
-            android:gravity="center_horizontal">
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                >
-                <TextView
-                    android:id="@+id/tvTag"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/popular"
-                    android:textSize="12sp"
-                    android:textStyle="bold"
-                    android:textColor="@android:color/white"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            android:gravity="center_horizontal"
+            android:background="@drawable/bg_dummy_new"
+            app:layout_constraintTop_toBottomOf="@id/ivPlanImage"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <TextView
+                android:id="@+id/tvTag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="POPULAR"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                android:textSize="12sp"
+                android:layout_gravity="end" />
+
             <TextView
                 android:id="@+id/tvPlanName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/pro"
+                android:text="PRO"
                 android:textStyle="bold"
                 android:textSize="22sp"
-                android:layout_margin="8dp"
+                android:layout_marginTop="8dp"
                 android:textColor="@android:color/white" />
 
             <TextView
                 android:id="@+id/tvPlanPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/rs_1_day"
+                android:text="₹ 1/DAY"
                 android:layout_marginTop="4dp"
                 android:textSize="14sp"
                 android:textColor="@android:color/white" />
-
-
-
-
         </LinearLayout>
 
-        <!-- Description -->
+        <!-- description below where dots will appear (dots are global) -->
         <TextView
             android:id="@+id/tvPlanDescription"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/head_text"
-            android:layout_marginTop="12dp"
-            android:textStyle="bold"
+            android:text="Description text"
             android:textAlignment="center"
+            android:textStyle="bold"
             android:textColor="@android:color/black"
-            android:textSize="21sp" />
+            android:textSize="18sp"
+            app:layout_constraintTop_toBottomOf="@id/planCard"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="36dp" />
 
-        <!-- Features RecyclerView -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvFeatures"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_marginTop="12dp" />
+            android:nestedScrollingEnabled="false"
+            app:layout_constraintTop_toBottomOf="@id/tvPlanDescription"
+            app:layout_constraintBottom_toTopOf="@id/buttonStart"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="12dp"/>
 
-    </LinearLayout>
+        <Button
+            android:id="@+id/buttonStart"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/starts_at_0_day"
+            android:textAllCaps="false"
+            android:paddingVertical="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

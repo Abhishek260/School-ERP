@@ -3,10 +3,10 @@ package com.mahaabhitechsolutions.mahaKarya.ui.task.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.mahaabhitechsolutions.mahaKarya.R
 import com.mahaabhitechsolutions.mahaKarya.databinding.ItemFeaturesBinding
 import com.mahaabhitechsolutions.mahaKarya.ui.task.model.DataAnnual
+import com.mahaabhitechsolutions.mahaKarya.R
+
 
 class FeaturesAdapter(private val features: List<DataAnnual>) :
     RecyclerView.Adapter<FeaturesAdapter.FeatureViewHolder>() {
@@ -15,23 +15,22 @@ class FeaturesAdapter(private val features: List<DataAnnual>) :
         RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeatureViewHolder {
-        val binding =
-            ItemFeaturesBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemFeaturesBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return FeatureViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: FeatureViewHolder, position: Int) {
         val item = features[position]
-        val binding = holder.binding
+        holder.binding.tvFeatureText.text = item.text ?: ""
 
-        // Text
-        binding.tvFeatureText.text = item.text
-
-        // Icon
-        val icon = if (item.isLocked=="True") R.drawable.lock_svg else R.drawable.check_svg
-        Glide.with(binding.root.context)
-            .load(icon)
-            .into(binding.root.findViewById(R.id.tvFeatureText))
+        // icon and locked look
+        if (item.isLocked=="True") {
+            holder.binding.imageView.setImageResource(R.drawable.lock_svg)
+            holder.binding.tvFeatureText.alpha = 0.5f
+        } else {
+            holder.binding.imageView.setImageResource(R.drawable.check_svg)
+            holder.binding.tvFeatureText.alpha = 1f
+        }
     }
 
     override fun getItemCount(): Int = features.size

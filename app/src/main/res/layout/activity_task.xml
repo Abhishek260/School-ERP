@@ -45,38 +45,30 @@
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/viewPagerPlans"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginTop="12dp"
             app:layout_constraintTop_toBottomOf="@id/headerLayout"
+            app:layout_constraintBottom_toTopOf="@id/dots_indicator"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/buttonStart" />
+            android:clipToPadding="false"
+            android:paddingBottom="24dp" />
 
+        <!-- Dots Indicator (global, attached to ViewPager) -->
         <com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
             android:id="@+id/dots_indicator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:dotsColor="@color/gray"
+            app:selectedDotColor="@color/btn_color"
             app:layout_constraintTop_toBottomOf="@id/viewPagerPlans"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="8dp" />
-
-
-        <!-- Start Button -->
-        <Button
-            android:id="@+id/buttonStart"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="STARTS AT RS 4/DAY"
-            android:layout_marginHorizontal="24dp"
-            android:layout_marginBottom="16dp"
-            android:textAllCaps="false"
-            android:backgroundTint="@color/btn_color"
-            android:textColor="@android:color/white"
-            android:paddingVertical="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="12dp"/>
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

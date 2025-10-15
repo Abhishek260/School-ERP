@@ -5,4 +5,5 @@
     <color name="btn_color">#377E8B</color>
     <color name="header_color">#242F35</color>
     <color name="bg_dummy">#095B69</color>
+    <color name="gray">#666666</color>
 </resources>

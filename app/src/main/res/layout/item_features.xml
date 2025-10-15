@@ -12,6 +12,7 @@
         android:paddingVertical="6dp">
 
         <ImageView
+            android:id="@+id/imageView"
             android:layout_width="18dp"
             android:layout_height="18dp"
             android:src="@drawable/check_svg"/>
