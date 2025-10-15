@@ -57,34 +57,13 @@ import javax.inject.Inject
 @AndroidEntryPoint
 open class BaseActivity @Inject constructor(): AppCompatActivity() {
     lateinit var mContext: Context
-    //    var progressDialog: ProgressDialog? = null
-//    var prefManager: PrefManager? = null
-    var serverErrorMsg = "Something went wrong, please try again later."
-    var somethingWentWrongErrorMsg = "Something Went Wrong, Please Try Again."
-    var internetError = "Internet Not Working Please Check Your Internet Connection"
-    val noLoadingGRSelectedErrMsg = "No Loading/GR # is selected for manifest. Please select at least 1 Loading/GR #."
 
-    var mPeriod: MutableLiveData<PeriodSelection> = MutableLiveData()
-    var timePeriod: MutableLiveData<String> = MutableLiveData()
-    var imageClicked: MutableLiveData<Boolean> = MutableLiveData()
     private lateinit var storagePermission: Array<String>
-    private lateinit var cameraPermission: Array<String>
     private lateinit var uri: Uri
     private lateinit var file : File
     private lateinit var camIntent: Intent
     private lateinit var cameraLauncher: ActivityResultLauncher<Intent>
     private lateinit var galleryLauncher: ActivityResultLauncher<String>
-    private var materialDatePicker: MaterialDatePicker<*>? = null
-    private var singleDatePicker: MaterialDatePicker<*>? = null
-
-    var singleDatePeriodWithViewType: MutableLiveData<SingleDatePickerWIthViewTypeModel> = MutableLiveData()
-    private var singleDatePickerWithViewType: MaterialDatePicker<*>? = null
-
-    var timeSelectionWithViewType: MutableLiveData<TimePickerWithViewType> = MutableLiveData()
-
-        var timePicker: TimePicker? = null
-//    var loginDataModel: LoginDataModel? = null
-//    var userDataModel: UserDataModel? = null
     private var dateFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd")
     var progressDialog: ProgressDialog? = null
     private var prefs: SharedPreferences? = null
@@ -104,73 +83,6 @@ open class BaseActivity @Inject constructor(): AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mContext=this@BaseActivity
-        setObservers()
-
-//        val loginModel = getLoginData()
-//        if(loginModel != null) {
-//            loginDataModel = loginModel
-//        }
-
-        cameraPermission = arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-        storagePermission = arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-        cameraLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == Activity.RESULT_OK) {
-                // Handle the result from the camera
-
-//                val intent = Intent(this@BaseActivity, CropImageActivity::class.java)
-//                intent.putExtra("DATA", uri.toString()) // Pass the captured image's Uri to CropImageActivity
-//                imageLauncher.launch(intent)
-
-
-//                startActivity(intent)
-            }
-        }
-
-        galleryLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) { result ->
-            if (result != null) {
-
-//                val intent = Intent(this@BaseActivity, CropImageActivity::class.java)
-//                intent.putExtra("DATA", result.toString()) // Pass the gallery image's Uri to CropImageActivity
-//                imageLauncher.launch(intent)
-
-//                startActivity(intent)
-            }
-        }
-        imageLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            try {
-                if (result.resultCode == Activity.RESULT_OK) {
-                    var data = result.data
-                    if (data != null) {
-                        if (data.hasExtra("IMAGE_RESULT_BACK")) {
-                            var imageUri = data.getStringExtra("IMAGE_RESULT_BACK")
-                            if (!imageUri.isNullOrBlank()) {
-                                var imageConvertedToUri: Uri? = Uri.parse(imageUri)
-                                if(imageConvertedToUri != null) {
-                                    var base64 = convertImageUriToBase64(
-                                        contentResolver = contentResolver,
-                                        imageUri = imageConvertedToUri
-                                    )
-                                    var bitmap: Bitmap? = null
-                                    if (base64 != null) {
-                                        bitmap = getBitmapFromBase64(base64 = base64)
-                                        if (bitmap != null) {
-                                            imageBase64List.add(base64)
-                                            imageBitmapList.add(bitmap)
-                                            imageUriList.add(imageConvertedToUri)
-//                                            imageBase64List.add(imageBase64List.size - 1, base64)
-//                                            imageBitmapList.add(imageBitmapList.size - 1, bitmap)
-                                            imageClicked.postValue(true)
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            } catch (ex: Exception) {
-                errorToast(ex.message)
-            }
-        }
     }
 
     @SuppressLint("UnspecifiedRegisterReceiverFlag")
@@ -215,124 +127,16 @@ open class BaseActivity @Inject constructor(): AppCompatActivity() {
             return formatter.format(date)
         }
 
-        fun showSnackBar(view: View, mContext: Context, msg: String?, isSuccessSnackBar: Boolean) {
-//            if(msg.isNullOrBlank()) {
-//                return
-//            }
-//            val snackbar = Snackbar.make(view, "", Snackbar.LENGTH_LONG)
-//            val layoutInflater = LayoutInflater.from(mContext)
-//            val customSnackView: View =
-//                layoutInflater.inflate(R.layout.custom_snackbar, null)
-//            val materialCard: MaterialCardView = customSnackView.findViewById(R.id.snackbar_materialCardView)
-//            snackbar.getView().setBackgroundColor(Color.TRANSPARENT);
-//            var strokeColor = "#38761d"
-//            var cardBackgroundColor = "#9fc490"
-//            if(!isSuccessSnackBar) {
-//                strokeColor = "#c62d42"
-//                cardBackgroundColor = "#ca9d9d"
-//            }
-//            materialCard.setStrokeColor(Color.parseColor(strokeColor))
-//            materialCard.setCardBackgroundColor(Color.parseColor(cardBackgroundColor))
-//            val snackbarLayout = snackbar.view as SnackbarLayout
-//            snackbarLayout.setPadding(0, 0, 0, 0)
-//            var textView: TextView = customSnackView.findViewById(R.id.snackBar_Msg)
-//            textView.setText(msg)
-//            snackbarLayout.addView(customSnackView, 0)
-//            snackbar.show()
-        }
-        fun successToast(mContext: Context, msg: String?, view: View? = null) {
-//        Toast.makeText(mContext,msg,Toast.LENGTH_LONG).show();
-
-            if(view != null) {
-                showSnackBar(view, mContext, msg, true)
-                return;
-            } else {
-                var rootView: View? = null
-                try {
-                    rootView = (this as AppCompatActivity).window.decorView.findViewById(android.R.id.content)
-                } catch (ex: Exception) {
-                    rootView = (mContext as AppCompatActivity).window.decorView.findViewById(android.R.id.content)
-                }
-                if(rootView != null)
-                    showSnackBar(rootView, mContext, msg, true)
-                else
-                    Toast.makeText(mContext, msg, Toast.LENGTH_LONG).show()
-                return
-            }
-
-            if (android.os.Build.VERSION.SDK_INT <= android.os.Build.VERSION_CODES.Q) {
-
-                val toast = Toast.makeText(mContext, msg, Toast.LENGTH_LONG)
-                val view = toast.view
-                view!!.background.setColorFilter(
-                    ContextCompat.getColor(mContext, android.R.color.holo_green_dark),
-
-                    PorterDuff.Mode.SRC_IN
-                )
-                val text = view.findViewById<TextView>(android.R.id.message)
-                text.setTextColor(ContextCompat.getColor(mContext, R.color.white))
-                toast.show()
-                // only for gingerbread and newer versions
-            } else {
-                if(msg != null) {
-                    Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
-
-        fun errorToast(mContext: Context, msg: String?, view: View? = null) {
-            //        Toast.makeText(mContext,msg,Toast.LENGTH_LONG).show();
-
-            if(view != null) {
-                showSnackBar(view, mContext, msg, false)
-                return;
-            } else {
-                var rootView: View? = null
-                try {
-                    rootView = (this as AppCompatActivity).window.decorView.findViewById(android.R.id.content)
-                } catch (ex: Exception) {
-                    rootView = (mContext as AppCompatActivity).window.decorView.findViewById(android.R.id.content)
-                }
-                if(rootView != null)
-                    showSnackBar(rootView, mContext, msg, false)
-                else
-                    Toast.makeText(mContext, msg, Toast.LENGTH_LONG).show()
-                return
-            }
-
-            if (android.os.Build.VERSION.SDK_INT <= android.os.Build.VERSION_CODES.Q) {
-                val toast = Toast.makeText(mContext, msg, Toast.LENGTH_LONG)
-                val view = toast.view
-                view!!.background.setColorFilter(
-                    ContextCompat.getColor(mContext, android.R.color.holo_red_dark),
-                    PorterDuff.Mode.SRC_IN
-                )
-                val text = view!!.findViewById<TextView>(android.R.id.message)
-                text.setTextColor(ContextCompat.getColor(mContext, R.color.white))
-                toast.show()
-            } else {
-                if(msg != null) {
-                    Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show()
-                }
-            }
+        open fun errorToast(mContext: Context,text:String){
+            Toast.makeText(mContext, text, Toast.LENGTH_SHORT).show()
         }
     }
-
-//    open fun openCommonBottomSheet(mContext: Context, title: String, bottomSheetClick: BottomSheetClick<Any>, commonList: ArrayList<CommonBottomSheetModel<Any>>, withAdapter: Boolean = false, index: Int = -1) {
-////        showProgressDialog()
-//        val bottomSheetDialog = CommonBottomSheet.newInstance(mContext, title, bottomSheetClick, commonList, withAdapter, index)
-////        hideProgressDialog()
-//        bottomSheetDialog.show(supportFragmentManager, CommonBottomSheet.TAG)
-//    }
 
 
     private fun getSharedPref(): SharedPreferences {
         if(this.prefs != null) {
             return prefs!!
         }
-//        prefs = getPreferences(MODE_PRIVATE)
-//        prefs = getSharedPreferences("KGS_PRINTING_APP", MODE_PRIVATE)
-//        prefs = PreferenceManager.getDefaultSharedPreferences(mContext)
         prefs = getSharedPreferences(packageName, Context.MODE_PRIVATE);
         return prefs!!
     }
@@ -422,298 +226,6 @@ open class BaseActivity @Inject constructor(): AppCompatActivity() {
         prefEditor?.apply()
     }
 
-//    protected fun getLoginData(): LoginDataModel? {
-//        prefs = getSharedPref()
-//        val userDataJson = getStorageString(ENV.LOGIN_DATA_PREF_TAG)
-//        if(userDataJson != "") {
-//            val dataModel: LoginDataModel? = Gson().fromJson(userDataJson, LoginDataModel::class.java)
-//            if(dataModel != null) {
-//                loginDataModel = dataModel
-//            }
-//            return dataModel
-//        }
-//        return null
-//    }
-
-    open fun successToast(msg: String?, view: View? = null) {
-//        Toast.makeText(mContext,msg,Toast.LENGTH_LONG).show();
-        if(view != null) {
-            showSnackBar(view, this, msg, true)
-            return;
-        } else {
-            val rootView: View =
-                (this as Activity).window.decorView.findViewById(android.R.id.content)
-            showSnackBar(rootView, this, msg, true)
-            return
-        }
-
-        if (android.os.Build.VERSION.SDK_INT <= android.os.Build.VERSION_CODES.Q) {
-
-            val toast = Toast.makeText(mContext, msg, Toast.LENGTH_LONG)
-            val view = toast.view
-            view!!.background.setColorFilter(
-                ContextCompat.getColor(mContext, android.R.color.holo_green_dark),
-
-                PorterDuff.Mode.SRC_IN
-            )
-            val text = view!!.findViewById<TextView>(android.R.id.message)
-            text.setTextColor(ContextCompat.getColor(mContext, R.color.white))
-            toast.show()
-            // only for gingerbread and newer versions
-        } else {
-            if(msg != null) {
-                Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
-
-    open fun errorToast(msg: String?, view: View? = null) {
-        playSound()
-        if(view != null) {
-            showSnackBar(view, this, msg, false)
-            return;
-        } else {
-            val rootView: View =
-                (this as Activity).window.decorView.findViewById(android.R.id.content)
-            showSnackBar(rootView, this, msg, false)
-            return
-        }
-        //        Toast.makeText(mContext,msg,Toast.LENGTH_LONG).show();
-        if (android.os.Build.VERSION.SDK_INT <= android.os.Build.VERSION_CODES.Q) {
-            val toast = Toast.makeText(mContext, msg, Toast.LENGTH_LONG)
-            val view = toast.view
-            view!!.background.setColorFilter(
-                ContextCompat.getColor(mContext, android.R.color.holo_red_dark),
-                PorterDuff.Mode.SRC_IN
-            )
-            val text = view!!.findViewById<TextView>(android.R.id.message)
-            text.setTextColor(ContextCompat.getColor(mContext, R.color.white))
-            toast.show()
-        } else {
-            if(msg != null) {
-                Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
-
-    fun openDatePicker() {
-        Log.d("BASE ACTIVITY", "PERIOD SELECTION CLICKED")
-        val materialDateBuilder: MaterialDatePicker.Builder<*> =
-            MaterialDatePicker.Builder.dateRangePicker()
-        materialDateBuilder.setTitleText("SELECT A PERIOD")
-        materialDatePicker = materialDateBuilder.build()
-        materialDatePicker!!.addOnPositiveButtonClickListener { selection ->
-            val viewFormat = SimpleDateFormat("dd-MM-yyyy")
-            val sqlFormat = SimpleDateFormat("yyyy-MM-dd")
-            val selectedDate = selection as androidx.core.util.Pair<Long?, Long?>
-            if(selectedDate.first != null && selectedDate.second != null) {
-                val fromDate = Date(selectedDate.first!!)
-                val toDate = Date(selectedDate.second!!)
-                val periodSelection = PeriodSelection()
-                periodSelection.sqlFromDate = sqlFormat.format(fromDate)
-                periodSelection.sqlToDate = sqlFormat.format(toDate)
-                periodSelection.viewFromDate = viewFormat.format(fromDate)
-                periodSelection.viewToDate = viewFormat.format(toDate)
-                mPeriod.postValue(periodSelection)
-            }
-        }
-        if(materialDatePicker != null) {
-            if (materialDatePicker!!.isVisible) {
-                return;
-            }
-            materialDatePicker!!.show(supportFragmentManager, "DATE_PICKER");
-        }
-//            MaterialPickerOnPositiveButtonClickListener<Pair<Long?, Long?>> { (first, second) ->
-//                val viewFormat = SimpleDateFormat("MM-dd-yyyy")
-//                val sqlFormat = SimpleDateFormat("yyyy-MM-dd")
-//                val fromDate = Date(first)
-//                val toDate = Date(second)
-//                val periodSelection = PeriodSelection()
-//                periodSelection.setSqlFromDate(sqlFormat.format(fromDate))
-//                periodSelection.setSqlToDate(sqlFormat.format(toDate))
-//                periodSelection.setViewFromDate(viewFormat.format(fromDate))
-//                periodSelection.setViewToDate(viewFormat.format(toDate))
-//                mPeriod.postValue(periodSelection)
-//            })
-    }
-
-    open fun openBookingDatePicker() {
-        val constraints =CalendarConstraints.Builder()
-            .setValidator(DateValidatorPointForward.now())
-            .build()
-
-//        ---------------------------
-
-        Log.d("BASE ACTIVITY", "SINGLE PERIOD SELECTION")
-        val materialDateBuilder: MaterialDatePicker.Builder<*> =
-            MaterialDatePicker.Builder.datePicker()
-        materialDateBuilder.setTitleText("SELECT A DATE")
-        materialDateBuilder.setCalendarConstraints(constraints)
-        singleDatePicker = materialDateBuilder.build()
-        singleDatePicker!!.addOnPositiveButtonClickListener{ selection: Any ->
-            val viewFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
-            val sqlFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-            val selectedDate = selection
-            val singleDate = Date(selectedDate as Long)
-            val periodSelection = PeriodSelection()
-            periodSelection.sqlsingleDate = sqlFormat.format(singleDate)
-            periodSelection.viewsingleDate = viewFormat.format(singleDate)
-            mPeriod.postValue(periodSelection)
-        }
-        if(singleDatePicker != null) {
-            if (singleDatePicker!!.isVisible) {
-                return;
-            }
-            singleDatePicker!!.show(supportFragmentManager, "DATE_PICKER");
-        }
-    }
-
-
-    open fun openSingleDatePicker() {
-        Log.d("BASE ACTIVITY", "SINGLE PERIOD SELECTION")
-        val materialDateBuilder: MaterialDatePicker.Builder<*> =
-            MaterialDatePicker.Builder.datePicker()
-        materialDateBuilder.setTitleText("SELECT A DATE")
-        singleDatePicker = materialDateBuilder.build()
-        singleDatePicker!!.addOnPositiveButtonClickListener{ selection: Any ->
-            val viewFormat = SimpleDateFormat("dd-MM-yyyy")
-            val sqlFormat = SimpleDateFormat("yyyy-MM-dd")
-            val selectedDate = selection
-            val singleDate = Date(selectedDate as Long)
-            val periodSelection = PeriodSelection()
-            periodSelection.sqlsingleDate = sqlFormat.format(singleDate)
-            periodSelection.viewsingleDate = viewFormat.format(singleDate)
-            mPeriod.postValue(periodSelection)
-        }
-        if(singleDatePicker != null) {
-            if (singleDatePicker!!.isVisible) {
-                return;
-            }
-            singleDatePicker!!.show(supportFragmentManager, "DATE_PICKER");
-        }
-    }
-
-    open fun openSingleDatePickerWithViewType(viewType: String, withAdapter: Boolean = false, index: Int = -1) {
-        Log.d("BASE ACTIVITY", "SINGLE PERIOD SELECTION")
-        val materialDateBuilder: MaterialDatePicker.Builder<*> =
-            MaterialDatePicker.Builder.datePicker()
-        materialDateBuilder.setTitleText("SELECT A DATE")
-        singleDatePickerWithViewType = materialDateBuilder.build()
-        singleDatePickerWithViewType!!.addOnPositiveButtonClickListener{ selection: Any ->
-            val viewFormat = SimpleDateFormat("dd-MM-yyyy")
-            val sqlFormat = SimpleDateFormat("yyyy-MM-dd")
-            val selectedDate = selection
-            val singleDate = Date(selectedDate as Long)
-            val periodSelection = PeriodSelection()
-            periodSelection.sqlsingleDate = sqlFormat.format(singleDate)
-            periodSelection.viewsingleDate = viewFormat.format(singleDate)
-            val singleDatePickerWIthViewTypeModel = SingleDatePickerWIthViewTypeModel(
-                viewType,
-                periodSelection,
-                withAdapter,
-                index
-            )
-            singleDatePeriodWithViewType.postValue(singleDatePickerWIthViewTypeModel)
-        }
-        if(singleDatePickerWithViewType != null) {
-            if (singleDatePickerWithViewType!!.isVisible) {
-                return;
-            }
-            singleDatePickerWithViewType!!.show(supportFragmentManager, "DATE_PICKER");
-        }
-    }
-
-
-    open fun openTimePickerWithViewType(viewType: String, withAdapter: Boolean = false, index: Int = -1) {
-        val materialTimePicker: MaterialTimePicker = MaterialTimePicker.Builder()
-            .setTitleText("SELECT YOUR TIMING")
-            .setHour(12)
-            .setMinute(10)
-            .setTimeFormat(TimeFormat.CLOCK_24H)
-            .build()
-
-        materialTimePicker.show(supportFragmentManager, "TIME_SELECTION")
-        materialTimePicker.addOnPositiveButtonClickListener {
-
-            val pickedHour: Int = materialTimePicker.hour
-            val pickedMinute: Int = materialTimePicker.minute
-            val formattedTime: String = when {
-                (pickedMinute < 10)-> {
-                    "${materialTimePicker.hour}:0${materialTimePicker.minute}"
-                }
-                else -> {
-                    "${materialTimePicker.hour}:${materialTimePicker.minute}"
-                }
-            }
-            val singleTimePickerWIthViewTypeModel = TimePickerWithViewType(
-                viewType,
-                formattedTime,
-                withAdapter,
-                index
-            )
-            timeSelectionWithViewType.postValue(singleTimePickerWIthViewTypeModel)
-        }
-    }
-
-
-
-    open fun openTimePicker() {
-        val c = Calendar.getInstance()
-        val hour = c[Calendar.HOUR_OF_DAY]
-        val minute = c[Calendar.MINUTE]
-        val timePickerDialog = TimePickerDialog(this,
-            { timePicker, hourOfDay, minute ->
-                var timeSelection: TimeSelection? = null
-                if (hourOfDay < 10) {
-                    val viewSingleTime = "0$hourOfDay:$minute"
-                    val sqlSingleTime = "0$hourOfDay:$minute"
-                    timeSelection = TimeSelection(
-                        viewSingleTime = viewSingleTime,
-                        sqlSingleTime = sqlSingleTime
-                    )
-                } else {
-                    val viewSingleTime = "$hourOfDay:$minute"
-                    val sqlSingleTime = "$hourOfDay:$minute"
-                    timeSelection = TimeSelection(
-                        viewSingleTime = viewSingleTime,
-                        sqlSingleTime = sqlSingleTime
-                    )
-                }
-                timePeriod.postValue((timeSelection?:"").toString())
-            }, hour, minute, false
-        )
-        timePickerDialog.show()
-    }
-
-//    fun openSingleDatePicker() {
-//        Log.d("BASE ACTIVITY", "SINGLE PERIOD SELECTION")
-//        val materialDateBuilder: Material.Builder<*> =
-//            MaterialDatePicker.Builder.dateRangePicker()
-//        materialDateBuilder.setTitleText("SELECT A PERIOD")
-//        materialDatePicker = materialDateBuilder.build()
-//        materialDatePicker!!.addOnPositiveButtonClickListener { selection ->
-//            val viewFormat = SimpleDateFormat("MM-dd-yyyy")
-//            val sqlFormat = SimpleDateFormat("yyyy-MM-dd")
-//            val selectedDate = selection as androidx.core.util.Pair<Long?, Long?>
-//            if(selectedDate.first != null && selectedDate.second != null) {
-//                val fromDate = Date(selectedDate.first!!)
-//                val toDate = Date(selectedDate.second!!)
-//                val periodSelection = PeriodSelection()
-//                periodSelection.sqlFromDate = sqlFormat.format(fromDate)
-//                periodSelection.sqlToDate = sqlFormat.format(toDate)
-//                periodSelection.viewFromDate = viewFormat.format(fromDate)
-//                periodSelection.viewToDate = viewFormat.format(toDate)
-//                mPeriod.postValue(periodSelection)
-//            }
-//        }
-//        if(materialDatePicker != null) {
-//            if (materialDatePicker!!.isVisible) {
-//                return;
-//            }
-//            materialDatePicker!!.show(supportFragmentManager, "DATE_PICKER");
-//        }
-//    }
-
     open fun getSqlDate(): String? {
         dateFormat = SimpleDateFormat("yyyy-MM-dd")
         dateFormat.timeZone = TimeZone.getTimeZone("Asia/Kolkata")
@@ -736,69 +248,6 @@ open class BaseActivity @Inject constructor(): AppCompatActivity() {
             e.printStackTrace()
         }
     }
-
-//    open fun openTimePicker() {
-//        val materialTimePicker: MaterialTimePicker = MaterialTimePicker.Builder()
-//            .setTitleText("SELECT YOUR TIMING")
-//            .setHour(12)
-//            .setMinute(10)
-//            .setTimeFormat(TimeFormat.CLOCK_24H)
-//            .build()
-//
-//        materialTimePicker.show(supportFragmentManager, AcceptPickupBottomSheet.TAG)
-//        materialTimePicker.addOnPositiveButtonClickListener {
-//
-//            val pickedHour: Int = materialTimePicker.hour
-//            val pickedMinute: Int = materialTimePicker.minute
-//            val formattedTime: String = when {
-//                (pickedMinute < 10)-> {
-//                    "${materialTimePicker.hour}:0${materialTimePicker.minute}"
-//                }
-//                else -> {
-//                    "${materialTimePicker.hour}:${materialTimePicker.minute}"
-//                }
-//            }
-//            timePeriod.postValue(formattedTime)
-//        }
-//    }
-
-//    fun getCompanyId(): String {
-//        return userDataModel?.companyid.toString()
-//    }
-//    fun getUserCode(): String {
-//        return userDataModel?.usercode.toString()
-//    }
-//    fun snackBar(message:String){
-//        val snackBar = Snackbar.make(activityBinding.layout, message, Snackbar.LENGTH_LONG)
-//            .setAction("Click") {
-//                Toast.makeText(this, "Snack bar action", Toast.LENGTH_SHORT).show()
-//            }
-//        snackBar.show()
-//    }
-
-    fun showImageDialog() {
-        val options = arrayOf("Camera", "Gallery")
-        val builder = AlertDialog.Builder(this)
-        builder.setTitle("Pick Image From")
-        builder.setItems(options) { dialog, which ->
-            if (which == 0) {
-                if (!checkCameraPermission()) {
-                    requestCameraPermission()
-                } else {
-//                    pickFromGallery()
-                    pickFromCamera()
-                }
-            } else if (which == 1) {
-                if (!checkStoragePermission()) {
-                    requestStoragePermission()
-                } else {
-                    pickFromGallery()
-                }
-            }
-        }
-        builder.create().show()
-    }
-    //    Checking permission
     private fun checkStoragePermission(): Boolean {
         return ContextCompat.checkSelfPermission(
             this,
@@ -827,36 +276,6 @@ open class BaseActivity @Inject constructor(): AppCompatActivity() {
                     && ifPermissionGranted(Manifest.permission.CAMERA)
         }
 
-    }
-    fun requestCameraPermission() {
-        if(checkCameraPermission()) {
-            return
-        }
-        var permissions: Array<String>? = null
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
-            permissions = arrayOf(
-                Manifest.permission.READ_MEDIA_IMAGES,
-                Manifest.permission.READ_MEDIA_VIDEO,
-                Manifest.permission.READ_MEDIA_VISUAL_USER_SELECTED,
-                Manifest.permission.CAMERA
-            )
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            permissions = arrayOf(
-                Manifest.permission.READ_MEDIA_IMAGES,
-                Manifest.permission.READ_MEDIA_VIDEO,
-                Manifest.permission.CAMERA
-            )
-        } else {
-            permissions = arrayOf(
-                Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.CAMERA
-            )
-        }
-        if(permissions != null) {
-            requestPermissions(permissions, CAMERA_REQUEST)
-        } else {
-            errorToast("Something went wrong. Please reinstall the app.")
-        }
     }
 
     private fun pickFromGallery() {
@@ -902,21 +321,15 @@ open class BaseActivity @Inject constructor(): AppCompatActivity() {
             val decodedBytes: ByteArray = Base64.decode(base64, Base64.DEFAULT)
             return BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.size)
         } catch (ex: Exception) {
-            errorToast(ex.message)
+            Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()
         }
         return null
     }
-
     fun viewImageFullScreen(){
         startActivity(Intent
             (Intent.ACTION_VIEW, Uri.parse(imageBase64List.elementAt(0)))
         )
     }
 
-    fun logger(tag: String, msg: String) {
-        Log.d(tag, msg)
-    }
 
 }
-
-
