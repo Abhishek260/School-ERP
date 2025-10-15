@@ -52,6 +52,8 @@ dependencies {
 
     // Hilt
     implementation("com.google.dagger:hilt-android:2.51")
+    implementation(libs.androidx.activity)
+    implementation(libs.androidx.constraintlayout)
     kapt("com.google.dagger:hilt-compiler:2.51")
 
     // Retrofit & Gson
