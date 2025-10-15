@@ -8,4 +8,5 @@
     <string name="popular">POPULAR</string>
     <string name="enter_feature">enter feature</string>
     <string name="starts_at_0_day">STARTS AT ₹ 0/DAY</string>
+    <string name="description_text">Description text</string>
 </resources>

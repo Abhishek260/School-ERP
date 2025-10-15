@@ -53,6 +53,8 @@ class TaskActivity : AppCompatActivity() {
             this.planData = planData
             val adapter = PlanPagerAdapter(planData)
             activityBinding.viewPagerPlans.adapter = adapter
+            activityBinding.dotsIndicator.attachTo(activityBinding.viewPagerPlans)
+
             Log.d("Task_Data","$planData")
         }
     }

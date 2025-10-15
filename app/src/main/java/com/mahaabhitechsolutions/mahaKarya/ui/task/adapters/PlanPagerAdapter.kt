@@ -72,6 +72,8 @@ class PlanPagerAdapter(private val plans: List<Data>) :
                     layoutManager = LinearLayoutManager(binding.root.context)
                     adapter = FeaturesAdapter(features)
                     visibility = View.VISIBLE
+                    isNestedScrollingEnabled = false
+                    overScrollMode = View.OVER_SCROLL_NEVER
                 }
             } else {
                 binding.rvFeatures.visibility = View.GONE
@@ -82,17 +84,17 @@ class PlanPagerAdapter(private val plans: List<Data>) :
 
         // button text & background
         binding.buttonStart.text = plan.cta ?: binding.buttonStart.text
-        Glide.with(binding.buttonStart.context)
-            .load(plan.button_background)
-            .placeholder(R.drawable.bg_dummy_new)
-            .into(object : CustomTarget<Drawable>() {
-                override fun onResourceReady(resource: Drawable, transition: Transition<in Drawable>?) {
-                    binding.buttonStart.background = resource
-                }
-                override fun onLoadCleared(placeholder: Drawable?) {
-                    binding.buttonStart.background = placeholder
-                }
-            })
+//        Glide.with(binding.buttonStart.context)
+//            .load(plan.button_background)
+//            .placeholder(R.drawable.bg_dummy_new)
+//            .into(object : CustomTarget<Drawable>() {
+//                override fun onResourceReady(resource: Drawable, transition: Transition<in Drawable>?) {
+//                    binding.buttonStart.background = resource
+//                }
+//                override fun onLoadCleared(placeholder: Drawable?) {
+//                    binding.buttonStart.background = placeholder
+//                }
+//            })
 
     }
 
