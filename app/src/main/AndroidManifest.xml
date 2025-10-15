@@ -32,7 +32,7 @@
         android:theme="@style/Theme.BidBharat"
         tools:targetApi="36">
         <activity
-            android:name=".ui.splash.SplashActivity"
+            android:name=".ui.task.TaskActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

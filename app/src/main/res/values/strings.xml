@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Maha Karya</string>
+    <string name="choose_your_plan">Choose your plan</string>
+    <string name="head_text"><![CDATA[86% PRO Parents go through content & advice from Doctors every week]]></string>
+    <string name="plan_image">Plan Image</string>
+    <string name="rs_1_day">RS 1/DAY</string>
+    <string name="pro">PRO</string>
+    <string name="popular">POPULAR</string>
+    <string name="enter_feature">enter feature</string>
 </resources>
