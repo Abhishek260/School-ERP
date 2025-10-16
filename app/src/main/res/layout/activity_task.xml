@@ -56,18 +56,18 @@
             android:paddingBottom="24dp" />
 
         <!-- Dots Indicator (global, attached to ViewPager) -->
-        <com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
-            android:id="@+id/dots_indicator"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:dotsColor="@color/gray"
-            app:selectedDotColor="@color/btn_color"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="32dp"
-            android:layout_marginBottom="12dp"/>
+<!--        <com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator-->
+<!--            android:id="@+id/dots_indicator"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:dotsColor="@color/gray"-->
+<!--            app:selectedDotColor="@color/btn_color"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            android:layout_marginTop="32dp"-->
+<!--            android:layout_marginBottom="12dp"/>-->
 
 
 

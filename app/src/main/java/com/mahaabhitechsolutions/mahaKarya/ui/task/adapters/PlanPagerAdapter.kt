@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
@@ -14,7 +15,7 @@ import com.mahaabhitechsolutions.mahaKarya.databinding.ItemPlanPageBinding
 import com.mahaabhitechsolutions.mahaKarya.ui.task.adapters.FeaturesAdapter
 import com.mahaabhitechsolutions.mahaKarya.ui.task.model.Data
 
-class PlanPagerAdapter(private val plans: List<Data>) :
+class PlanPagerAdapter(private val plans: List<Data>,private val viewPager: ViewPager2) :
     RecyclerView.Adapter<PlanPagerAdapter.PlanViewHolder>() {
 
     inner class PlanViewHolder(val binding: ItemPlanPageBinding) :
@@ -65,6 +66,8 @@ class PlanPagerAdapter(private val plans: List<Data>) :
         binding.tvPlanName.text = plan.plan_name ?: ""
         binding.tvPlanPrice.text = "₹${plan.cost_per_day}/day"
         binding.tvPlanDescription.text = plan.claims ?: ""
+        binding.dotsIndicator.attachTo(viewPager)
+
 
         plan.description?.data_annual?.let { features ->
             if (features.isNotEmpty()) {
