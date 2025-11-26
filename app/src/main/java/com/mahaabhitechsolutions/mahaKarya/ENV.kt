@@ -3,7 +3,9 @@ package com.mahaabhitechsolutions.mahaKarya
 class ENV {
     companion object {
 
-        private const val LIVE_BASE_URL: String = "https://qa7.parentune.com/api/subscription/subscribe/v2/";
+        private const val LIVE_BASE_URL: String = "https://qa7.parentune.com/api/subscription/subscribe/v2/"
+        private const val  OTHER_BASE_URL: String =  "https://quotable.io/"
+
 
 
 
@@ -13,7 +15,7 @@ class ENV {
         }
 
         fun getOtherUrl():String{
-            return LIVE_BASE_URL;
+            return OTHER_BASE_URL;
         }
     }
 }

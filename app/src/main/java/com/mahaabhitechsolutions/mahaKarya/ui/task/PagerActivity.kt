@@ -15,7 +15,7 @@ import com.mahaabhitechsolutions.mahaKarya.ui.task.model.Data
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class TaskActivity : AppCompatActivity() {
+class PagerActivity : AppCompatActivity() {
     private val viewModel: TaskViewModel by viewModels()
     private var planData: List<Data> = ArrayList()
     private lateinit var activityBinding: ActivityTaskBinding

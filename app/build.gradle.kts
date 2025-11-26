@@ -54,6 +54,8 @@ dependencies {
     implementation("com.google.dagger:hilt-android:2.51")
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
     kapt("com.google.dagger:hilt-compiler:2.51")
 
     // Retrofit & Gson
