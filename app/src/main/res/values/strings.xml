@@ -56,4 +56,6 @@
     <string name="go_to_screen_1">Go to Screen 1</string>
     <string name="go_to_screen_2">Go to Screen 2</string>
     <string name="go_to_screen_3">Go to Screen 3</string>
+    <string name="banner_show">isBannerShow</string>
+    <string name="key_lang_id">lang_id</string>
 </resources>
