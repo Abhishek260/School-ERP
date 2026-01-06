@@ -13,5 +13,5 @@ dependencyResolutionManagement {
         maven("https://jitpack.io")
     }
 }
-rootProject.name = "Maha Karya"
+rootProject.name = "Eduvanta"
 include(":app")

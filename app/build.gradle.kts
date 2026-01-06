@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace = "com.mahaabhitechsolutions.mahaKarya"
+    namespace = "com.mahaabhitechsolutions.eduvanta"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.mahaabhitechsolutions.mahaKarya"
+        applicationId = "com.mahaabhitechsolutions.eduvanta"
         minSdk = 29
         //noinspection EditedTargetSdkVersion
         targetSdk = 36

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.mahaabhitechsolutions.mahaKarya.ui.task.FirstFragment"
+        android:name="com.mahaabhitechsolutions.eduvanta.ui.task.FirstFragment"
         android:label="@string/first_fragment_label"
         tools:layout="@layout/fragment_first">
 
@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="com.mahaabhitechsolutions.mahaKarya.ui.task.SecondFragment"
+        android:name="com.mahaabhitechsolutions.eduvanta.ui.task.SecondFragment"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_second">
 
