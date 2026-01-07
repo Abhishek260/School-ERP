@@ -8,7 +8,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#35CDB4">
+        android:background="@color/primary_dark">
 
         <!-- ED -->
         <TextView
@@ -16,9 +16,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/splash_start"
-            android:textSize="42sp"
+            android:textSize="56sp"
             android:textStyle="bold"
-            android:textColor="#1F4F4A"
+            android:textColor="@color/white"
+            android:layout_marginStart="64dp"
             android:fontFamily="@font/poppins_extrabold"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -28,10 +29,11 @@
         <!-- U IMAGE -->
         <ImageView
             android:id="@+id/imgU"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
             android:src="@drawable/u_holder"
-            android:visibility="visible"
+            android:visibility="invisible"
+            android:elevation="8dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/tvEd"
@@ -44,23 +46,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/app_end_name"
-            android:textSize="42sp"
+            android:textSize="56sp"
             android:textStyle="bold"
-            android:textColor="#1F4F4A"
+            android:textColor="@color/white"
             android:fontFamily="@font/poppins_extrabold"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/imgU"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintStart_toEndOf="@id/imgU" />
 
         <ImageView
             android:id="@+id/imgPens"
             android:layout_width="60dp"
             android:layout_height="120dp"
             android:src="@drawable/pens_pencils"
-            android:visibility="visible"
+            android:visibility="invisible"
             android:layout_marginStart="4dp"
-            android:layout_marginBottom="-52dp"
+            android:layout_marginBottom="-62dp"
             app:layout_constraintBottom_toTopOf="@id/imgU"
             app:layout_constraintStart_toStartOf="@id/imgU"
             app:layout_constraintEnd_toEndOf="@id/imgU" />
