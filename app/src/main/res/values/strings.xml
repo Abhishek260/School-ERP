@@ -58,4 +58,6 @@
     <string name="go_to_screen_3">Go to Screen 3</string>
     <string name="banner_show">isBannerShow</string>
     <string name="key_lang_id">lang_id</string>
+    <string name="splash_start">Ed</string>
+    <string name="app_end_name">vanta</string>
 </resources>

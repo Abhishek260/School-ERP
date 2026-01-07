@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.View
 import android.view.animation.AnimationUtils
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -26,7 +27,7 @@ class SplashActivity : AppCompatActivity() {
         setContentView(mBinding.root)
 
         setStatusBar()
-        animate()
+        animateSplash()
     }
 
     private fun setStatusBar() {
@@ -37,21 +38,36 @@ class SplashActivity : AppCompatActivity() {
         }
     }
 
-    private fun animate() {
-        val topAnim = AnimationUtils.loadAnimation(this, R.anim.top_to_center)
-        val bottomAnim = AnimationUtils.loadAnimation(this, R.anim.bottom_to_center)
+    private fun animateSplash() {
 
-        mBinding.tvTitle.startAnimation(topAnim)
-        mBinding.imgBoy.startAnimation(bottomAnim)
+        val edAnim = AnimationUtils.loadAnimation(this, R.anim.left_to_center)
+        val vantaAnim = AnimationUtils.loadAnimation(this, R.anim.right_to_center)
+        val uAnim = AnimationUtils.loadAnimation(this, R.anim.bottom_to_center)
+        val penDrop = AnimationUtils.loadAnimation(this, R.anim.pen_drop)
+
+        mBinding.tvEd.startAnimation(edAnim)
+        mBinding.tvVanta.startAnimation(vantaAnim)
 
         handler.postDelayed({
+            mBinding.imgU.visibility = View.VISIBLE
+            mBinding.imgU.startAnimation(uAnim)
+        }, 700)
+
+        handler.postDelayed({
+            mBinding.imgPens.visibility = View.VISIBLE
+            mBinding.imgPens.startAnimation(penDrop)
+        }, 1400)
+
+
+        Handler(Looper.getMainLooper()).postDelayed({
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         }, 2500)
     }
 
+
     override fun onDestroy() {
-        handler.removeCallbacksAndMessages(null) // memory-safe
+        handler.removeCallbacksAndMessages(null)
         super.onDestroy()
     }
 }

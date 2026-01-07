@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -9,37 +8,62 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#4F73C7">
+        android:background="#35CDB4">
 
+        <!-- ED -->
         <TextView
-            android:id="@+id/tvTitle"
+            android:id="@+id/tvEd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/diplomata_sc"
-            android:gravity="center"
-            android:text="@string/app_name"
-            android:textColor="@android:color/white"
-            android:textSize="36sp"
+            android:text="@string/splash_start"
+            android:textSize="42sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:textColor="#1F4F4A"
+            android:fontFamily="@font/poppins_extrabold"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/imgU" />
 
-            app:layout_constraintVertical_bias="0.25" />
+        <!-- U IMAGE -->
+        <ImageView
+            android:id="@+id/imgU"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/u_holder"
+            android:visibility="visible"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tvEd"
+            app:layout_constraintEnd_toStartOf="@id/tvVanta"
+            app:layout_constraintHorizontal_chainStyle="packed" />
+
+        <!-- VANTA -->
+        <TextView
+            android:id="@+id/tvVanta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_end_name"
+            android:textSize="42sp"
+            android:textStyle="bold"
+            android:textColor="#1F4F4A"
+            android:fontFamily="@font/poppins_extrabold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/imgU"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <ImageView
-            android:id="@+id/imgBoy"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:scaleType="fitCenter"
-            android:src="@drawable/splash_boy"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.75" />
-
+            android:id="@+id/imgPens"
+            android:layout_width="60dp"
+            android:layout_height="120dp"
+            android:src="@drawable/pens_pencils"
+            android:visibility="visible"
+            android:layout_marginStart="4dp"
+            android:layout_marginBottom="-52dp"
+            app:layout_constraintBottom_toTopOf="@id/imgU"
+            app:layout_constraintStart_toStartOf="@id/imgU"
+            app:layout_constraintEnd_toEndOf="@id/imgU" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
