@@ -13,7 +13,10 @@ import androidx.core.view.WindowInsetsCompat
 import com.mahaabhitechsolutions.eduvanta.MainActivity
 import com.mahaabhitechsolutions.eduvanta.R
 import com.mahaabhitechsolutions.eduvanta.databinding.ActivitySplashBinding
+import com.mahaabhitechsolutions.eduvanta.ui.login.LoginActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SplashActivity : AppCompatActivity() {
 
     private lateinit var mBinding: ActivitySplashBinding
@@ -60,7 +63,7 @@ class SplashActivity : AppCompatActivity() {
 
 
         Handler(Looper.getMainLooper()).postDelayed({
-            startActivity(Intent(this, MainActivity::class.java))
+            startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }, 2500)
     }

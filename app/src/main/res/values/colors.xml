@@ -10,6 +10,6 @@
     <color name="btn_2">#FF6E6E</color>
     <color name="btn_3">#00C49A</color>
 <!--    Main App colors   -->
-    <color name="primary_dark">#3FA065</color>
-    <color name="primary_light">#E8F6EE</color>
+    <color name="primary_dark">#2855AE</color>
+    <color name="primary_light">#7292CF</color>
 </resources>
