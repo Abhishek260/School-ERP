@@ -24,6 +24,9 @@ class LoginActivity : AppCompatActivity() {
         setStatusBar()
         animateBubble(findViewById(R.id.bubble1), 80f)
         animateBubble(findViewById(R.id.bubble2), -100f)
+        val screenWidth = resources.displayMetrics.widthPixels
+        animateBubbleLeftRight(findViewById(R.id.bubble3), screenWidth)
+
 
         setOnClicks()
     }
@@ -48,5 +51,18 @@ class LoginActivity : AppCompatActivity() {
             }
             .start()
     }
+    private fun animateBubbleLeftRight(view: View, screenWidth: Int) {
+        view.translationX = -200f
+
+        view.animate()
+            .translationX(screenWidth.toFloat() + 200)
+            .setDuration(8000)
+            .setInterpolator(LinearInterpolator())
+            .withEndAction {
+                animateBubbleLeftRight(view, screenWidth)
+            }
+            .start()
+    }
+
 
 }
