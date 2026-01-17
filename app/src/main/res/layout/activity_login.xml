@@ -67,7 +67,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/user_name"
                     android:textSize="12sp"
-                    android:textColor="#9E9E9E" />
+                    android:textColor="@color/txt_primary" />
 
                 <EditText
                     android:id="@+id/etEmail"
@@ -75,8 +75,8 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/hint_user_name"
                     android:inputType="textEmailAddress"
-                    android:backgroundTint="#B0B0B0"
                     android:textSize="14sp"
+                    android:textColor="@color/txt_primary"
                     android:layout_marginBottom="20dp" />
 
                 <!-- Password -->
@@ -85,20 +85,47 @@
                     android:layout_height="wrap_content"
                     android:text="@string/tv_password"
                     android:textSize="12sp"
-                    android:textColor="#9E9E9E" />
+                    android:textColor="@color/txt_primary"
+                    />
 
-                <EditText
-                    android:id="@+id/etPassword"
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="********"
-                    android:inputType="textPassword"
-                    android:drawableEnd="@drawable/baseline_call_24"
-                    android:backgroundTint="#B0B0B0"
-                    android:textSize="14sp"
-                    android:layout_marginBottom="28dp" />
+                    android:layout_height="match_parent"
+                    >
 
-                <!-- Sign In Button -->
+                    <EditText
+                        android:id="@+id/etPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/password_hint"
+                        android:inputType="textPassword"
+                        android:textSize="14sp"
+                        android:textColor="@color/txt_primary"
+                        android:layout_marginBottom="20dp" />
+
+                    <ImageView
+                        android:id="@+id/show_pass_img"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/show"
+                        android:layout_marginEnd="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"  />
+
+                    <ImageView
+                        android:id="@+id/hide_pass_img"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/hide"
+                        android:layout_marginEnd="16dp"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnSignIn"
                     android:layout_width="match_parent"
@@ -107,6 +134,7 @@
                     android:textAllCaps="true"
                     android:textColor="@android:color/white"
                     android:textStyle="bold"
+                    android:layout_marginTop="24dp"
                     android:paddingHorizontal="20dp"
                     android:drawableEnd="@drawable/baseline_arrow_forward_24"
                     android:background="@drawable/bg_signin_button" />
@@ -117,8 +145,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/forgot_password"
-                    android:textSize="13sp"
-                    android:textColor="#555555"
+                    android:textSize="14sp"
+                    android:textColor="@color/txt_primary"
                     android:layout_gravity="center"
                     android:layout_marginTop="16dp" />
 

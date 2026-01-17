@@ -1,5 +1,6 @@
 package com.mahaabhitechsolutions.eduvanta.ui.splash
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -10,12 +11,12 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.mahaabhitechsolutions.eduvanta.MainActivity
 import com.mahaabhitechsolutions.eduvanta.R
 import com.mahaabhitechsolutions.eduvanta.databinding.ActivitySplashBinding
 import com.mahaabhitechsolutions.eduvanta.ui.login.LoginActivity
 import dagger.hilt.android.AndroidEntryPoint
 
+@SuppressLint("CustomSplashScreen")
 @AndroidEntryPoint
 class SplashActivity : AppCompatActivity() {
 
