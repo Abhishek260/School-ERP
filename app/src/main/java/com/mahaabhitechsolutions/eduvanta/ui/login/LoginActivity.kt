@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.view.View
+import android.view.animation.LinearInterpolator
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.mahaabhitechsolutions.eduvanta.R
 import com.mahaabhitechsolutions.eduvanta.databinding.ActivityLoginBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -20,6 +22,9 @@ class LoginActivity : AppCompatActivity() {
         mBinding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
         setStatusBar()
+        animateBubble(findViewById(R.id.bubble1), 80f)
+        animateBubble(findViewById(R.id.bubble2), -100f)
+
         setOnClicks()
     }
     private fun setStatusBar() {
@@ -30,19 +35,18 @@ class LoginActivity : AppCompatActivity() {
         }
     }
     private fun setOnClicks(){
-        mBinding.hidePassImg.setOnClickListener {
-            mBinding.etPassword.transformationMethod =
-                PasswordTransformationMethod.getInstance()
-            mBinding.showPassImg.visibility = View.VISIBLE
-            mBinding.hidePassImg.visibility = View.GONE
-            mBinding.etPassword.setSelection(mBinding.etPassword.text!!.length)
-        }
-        mBinding.showPassImg.setOnClickListener {
-            mBinding.etPassword.transformationMethod =
-                HideReturnsTransformationMethod.getInstance()
-            mBinding.showPassImg.visibility = View.GONE
-            mBinding.hidePassImg.visibility = View.VISIBLE
-            mBinding.etPassword.setSelection(mBinding.etPassword.text!!.length)
-        }
+
     }
+    private fun animateBubble(view: View, distance: Float) {
+        view.animate()
+            .translationYBy(distance)
+            .setDuration(6000)
+            .setInterpolator(LinearInterpolator())
+            .withEndAction {
+                view.translationY = 0f
+                animateBubble(view, distance)
+            }
+            .start()
+    }
+
 }
