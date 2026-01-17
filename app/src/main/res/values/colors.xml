@@ -9,4 +9,12 @@
     <color name="btn_1">#6C63FF</color>
     <color name="btn_2">#FF6E6E</color>
     <color name="btn_3">#00C49A</color>
+<!--    Main App colors   -->
+    <color name="primary_dark">#0D47A1</color>
+    <color name="txt_primary">#071121</color>
+    <color name="primary_light">#1E88E5</color>
+    <color name="secondary_color">#26A69A</color>
+    <color name="edittext_color">#F2F8FB</color>
+    <color name="border_background_color">#707070</color>
+    <color name="edittext_color_screen">#F6F7FA</color>
 </resources>

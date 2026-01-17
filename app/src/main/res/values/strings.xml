@@ -58,4 +58,15 @@
     <string name="go_to_screen_3">Go to Screen 3</string>
     <string name="banner_show">isBannerShow</string>
     <string name="key_lang_id">lang_id</string>
+    <string name="splash_start">Ed</string>
+    <string name="app_end_name">vanta</string>
+    <string name="no_image">Image is not availble</string>
+    <string name="welcome_msg">Hi User,</string>
+    <string name="sign_in_to_continue">Sign in to continue</string>
+    <string name="user_name">User Name</string>
+    <string name="hint_user_name">Enter mobile number / email</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="tv_password">Password</string>
+    <string name="txt_sign_in">SIGN IN</string>
+    <string name="password_hint">********</string>
 </resources>
