@@ -28,7 +28,7 @@ class LoginActivity : AppCompatActivity() {
         animateBubble(findViewById(R.id.bubble2), -100f)
         val screenWidth = resources.displayMetrics.widthPixels
         animateBubbleLeftRight(findViewById(R.id.bubble3), screenWidth)
-
+        setColor()
         setOnClicks()
     }
     private fun setStatusBar() {
