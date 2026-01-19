@@ -19,4 +19,6 @@
     <color name="border_background_color">#90A1B9</color>
     <color name="forgot_password">#155DFC</color>
     <color name="field_color">#0F172A</color>
+    <color name="input_bg_default">#F8FAFC</color>
+
 </resources>
