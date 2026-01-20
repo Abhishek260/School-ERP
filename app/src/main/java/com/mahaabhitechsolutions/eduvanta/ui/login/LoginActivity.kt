@@ -1,10 +1,9 @@
 package com.mahaabhitechsolutions.eduvanta.ui.login
 
+import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
-import android.text.method.HideReturnsTransformationMethod
-import android.text.method.PasswordTransformationMethod
 import android.view.View
 import android.view.animation.LinearInterpolator
 import androidx.activity.enableEdgeToEdge
@@ -13,6 +12,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.mahaabhitechsolutions.eduvanta.R
 import com.mahaabhitechsolutions.eduvanta.databinding.ActivityLoginBinding
+import com.mahaabhitechsolutions.eduvanta.ui.dashboard.student.StudentDashboardActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -24,8 +24,8 @@ class LoginActivity : AppCompatActivity() {
         mBinding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
         setStatusBar()
-        animateBubble(findViewById(R.id.bubble1), 80f)
-        animateBubble(findViewById(R.id.bubble2), -100f)
+        animateBubble(mBinding.bubble1, 80f)
+        animateBubble(mBinding.bubble2, -100f)
         val screenWidth = resources.displayMetrics.widthPixels
         animateBubbleLeftRight(findViewById(R.id.bubble3), screenWidth)
         setColor()
@@ -39,7 +39,10 @@ class LoginActivity : AppCompatActivity() {
         }
     }
     private fun setOnClicks(){
-
+        mBinding.btnSignIn.setOnClickListener {
+            val intent = Intent(this, StudentDashboardActivity::class.java)
+            startActivity(intent)
+        }
     }
     private fun animateBubble(view: View, distance: Float) {
         view.animate()
