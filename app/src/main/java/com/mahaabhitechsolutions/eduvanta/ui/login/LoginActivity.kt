@@ -1,6 +1,11 @@
 package com.mahaabhitechsolutions.eduvanta.ui.login
 
+import android.content.Intent
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Bundle
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import android.view.View
 import android.view.animation.LinearInterpolator
 import androidx.activity.enableEdgeToEdge
@@ -22,9 +27,14 @@ class LoginActivity : BaseActivity() {
         mBinding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
         setStatusBar()
+        animateBubble(findViewById(R.id.bubble1), 80f)
+        animateBubble(findViewById(R.id.bubble2), -100f)
+        val screenWidth = resources.displayMetrics.widthPixels
+        animateBubbleLeftRight(findViewById(R.id.bubble3), screenWidth)
         startAnimations()
-        setOnClicks()
+        setColor()
         setObservers()
+        setOnClicks()
     }
     private fun setStatusBar() {
         ViewCompat.setOnApplyWindowInsetsListener(mBinding.root) { v, insets ->
@@ -74,6 +84,31 @@ class LoginActivity : BaseActivity() {
                 showProgressDialog()
             } else {
                 hideProgressDialog()
+            }
+        }
+    }
+
+    private fun setColor(){
+        mBinding.tilUsername.editText?.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                mBinding.tilUsername.setBoxBackgroundColorResource(android.R.color.white)
+                mBinding.tilUsername.hintTextColor =
+                    ColorStateList.valueOf(Color.parseColor("#155DFC"))
+            } else {
+                mBinding.tilUsername.setBoxBackgroundColorResource(R.color.input_bg_default)
+                mBinding.tilUsername.hintTextColor =
+                    ColorStateList.valueOf(Color.parseColor("#E2E8F0"))
+            }
+        }
+        mBinding.tilPassword.editText?.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                mBinding.tilPassword.setBoxBackgroundColorResource(android.R.color.white)
+                mBinding.tilPassword.hintTextColor =
+                    ColorStateList.valueOf(Color.parseColor("#155DFC"))
+            } else {
+                mBinding.tilPassword.setBoxBackgroundColorResource(R.color.input_bg_default)
+                mBinding.tilPassword.hintTextColor =
+                    ColorStateList.valueOf(Color.parseColor("#E2E8F0"))
             }
         }
     }

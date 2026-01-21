@@ -1,11 +1,10 @@
-package com.mahaabhitechsolutions.eduvanta.ui.home
+package com.mahaabhitechsolutions.eduvanta.ui.dashboards.student
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.mahaabhitechsolutions.eduvanta.R
 import com.mahaabhitechsolutions.eduvanta.databinding.ActivityHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 
