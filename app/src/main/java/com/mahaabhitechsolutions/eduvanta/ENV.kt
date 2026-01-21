@@ -7,7 +7,7 @@ class ENV {
         const val USER_ROLE_STUDENT: String = "Student"
 
         private const val LIVE_BASE_URL: String = "https://qa7.parentune.com/api/subscription/subscribe/v2/"
-        private const val  OTHER_BASE_URL: String =  "https://quotable.io/"
+        private const val  OTHER_BASE_URL: String =  "http://localhost:8080/api/"
 
 
 

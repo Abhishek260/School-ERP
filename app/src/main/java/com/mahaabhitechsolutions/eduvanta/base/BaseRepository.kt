@@ -15,5 +15,6 @@ open class BaseRepository @Inject constructor() {
     val INTERNET_ERROR = "Internet Not Working Please Check Your Internet Connection"
     val isError: MutableLiveData<String> = MutableLiveData()
     val viewDialogMutData: MutableLiveData<Boolean> = MutableLiveData()
+    val messageMutData: MutableLiveData<String> = MutableLiveData()
 
 }

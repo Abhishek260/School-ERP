@@ -178,9 +178,9 @@ open class BaseActivity @Inject constructor(): AppCompatActivity() {
 
     open fun showProgressDialog() {
         progressDialog = ProgressDialog(mContext)
+        progressDialog!!.setTitle("Please wait")
         progressDialog!!.setMessage("Loading....")
         progressDialog!!.setCancelable(false)
-        //    progressDoalog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         progressDialog!!.show()
     }
 
