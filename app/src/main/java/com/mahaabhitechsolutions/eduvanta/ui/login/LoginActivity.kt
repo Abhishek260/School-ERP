@@ -4,6 +4,7 @@ import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.animation.LinearInterpolator
 import androidx.activity.enableEdgeToEdge
@@ -14,12 +15,14 @@ import com.mahaabhitechsolutions.eduvanta.R
 import com.mahaabhitechsolutions.eduvanta.base.BaseActivity
 import com.mahaabhitechsolutions.eduvanta.databinding.ActivityLoginBinding
 import com.mahaabhitechsolutions.eduvanta.ui.dashboard.student.StudentDashboardActivity
+import com.mahaabhitechsolutions.eduvanta.ui.login.model.LoginModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class LoginActivity : BaseActivity() {
     private lateinit var mBinding: ActivityLoginBinding
     private val viewModel: LoginViewModel by viewModels()
+    private var loginData: List<LoginModel> = ArrayList()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -43,15 +46,14 @@ class LoginActivity : BaseActivity() {
         }
     }
     private fun startAnimations(){
-        animateBubble(findViewById(R.id.bubble1), 80f)
-        animateBubble(findViewById(R.id.bubble2), -100f)
+        animateBubble(mBinding.bubble1, 80f)
+        animateBubble(mBinding.bubble2, -100f)
         val screenWidth = resources.displayMetrics.widthPixels
-        animateBubbleLeftRight(findViewById(R.id.bubble3), screenWidth)
+        animateBubbleLeftRight(mBinding.bubble3, screenWidth)
     }
     private fun setOnClicks(){
         mBinding.btnSignIn.setOnClickListener {
-            val intent = Intent(this, StudentDashboardActivity::class.java)
-            startActivity(intent)
+            validateLogin()
         }
     }
     private fun animateBubble(view: View, distance: Float) {
@@ -82,12 +84,36 @@ class LoginActivity : BaseActivity() {
         viewModel.isError.observe(this) { errMsg ->
             errorToast(this,errMsg)
         }
+        viewModel.massage.observe(this) { errorCode ->
+            when (errorCode) {
+                "USER_NOT_REGISTERED" -> {
+                    errorToast(this,"It seems you are not register with us.")
+                }
+                "WRONG_PASSWORD" -> {
+                    mBinding.tilPassword.error = "Wrong Password"
+                    mBinding.tilUsername.error = null
+                    mBinding.etPassword.text = null
+                }
+            }
+        }
         viewModel.viewDialogLiveData.observe(this) { show ->
             if (show) {
                 showProgressDialog()
             } else {
                 hideProgressDialog()
             }
+        }
+        viewModel.loginLiveData.observe(this){ loginData ->
+            this.loginData = loginData
+            when(this.loginData[0].roletype){
+                "student" ->{
+                    val intent = Intent(this, StudentDashboardActivity::class.java)
+                    intent.putExtra("Name", loginData[0].userid)
+                    startActivity(intent)
+                }
+            }
+
+
         }
     }
 
@@ -115,6 +141,31 @@ class LoginActivity : BaseActivity() {
             }
         }
     }
+    private fun validateLogin() {
+
+        val username = mBinding.etUserName.text?.toString()?.trim()
+        val password = mBinding.etPassword.text?.toString()?.trim()
+
+        when {
+            username.isNullOrEmpty() -> {
+                mBinding.tilUsername.error = "Username required"
+                mBinding.tilPassword.error = null
+            }
+
+            password.isNullOrEmpty() -> {
+                mBinding.tilPassword.error = "Password required"
+                mBinding.tilUsername.error = null
+            }
+
+            else -> {
+                mBinding.tilUsername.error = null
+                mBinding.tilPassword.error = null
+
+                viewModel.validateLogin(username, password)
+            }
+        }
+    }
+
 
 
 }

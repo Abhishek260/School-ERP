@@ -3,10 +3,11 @@ package com.mahaabhitechsolutions.eduvanta.ui.login
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.mahaabhitechsolutions.eduvanta.base.BaseRepository
 import com.mahaabhitechsolutions.eduvanta.common.CommonResult
 import com.mahaabhitechsolutions.eduvanta.ui.login.model.LoginModel
-import com.mahaabhitechsolutions.eduvanta.ui.task.model.TaskModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -28,11 +29,17 @@ class LoginRepository @Inject constructor() : BaseRepository() {
                 viewDialogMutData.postValue(false)
                 if (response.body() != null) {
                     val result = response.body()!!
+                    val gson = Gson()
                     if (result.status==1){
-                        loginMutData.postValue(result.response as List<LoginModel>)
+                        val responseData = result.response
+                        val listType =
+                            object : TypeToken<List<LoginModel>>() {}.type
+                        val loginList: List<LoginModel> = gson.fromJson(  gson.toJson(responseData), listType)
+                        loginMutData.postValue(loginList)
                         Log.d("API","${result.response}")
-                    }else{
-                        messageMutData.postValue(result.message)
+
+                    } else{
+                        messageMutData.postValue(result.errorcode)
                         Log.d("API", result.message)
                     }
                 } else {

@@ -130,6 +130,7 @@
                 app:startIconTint="@color/input_icon_selector"
                 >
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etUserName"
                     android:layout_width="match_parent"
                     android:layout_height="54dp"
                     android:paddingStart="48dp"
@@ -155,6 +156,7 @@
                 app:endIconMode="password_toggle">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etPassword"
                     android:layout_width="match_parent"
                     android:layout_height="54dp"
                     android:paddingStart="48dp"

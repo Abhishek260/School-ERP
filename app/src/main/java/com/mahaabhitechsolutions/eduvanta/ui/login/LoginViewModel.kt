@@ -13,6 +13,8 @@ import javax.inject.Inject
 class LoginViewModel @Inject constructor(private val _repository: LoginRepository) : BaseViewModel() {
     init {
         isError = _repository.isError
+        massage = _repository.messageMutData
+
     }
     val viewDialogLiveData: LiveData<Boolean>
         get()= _repository.viewDialogLiveData

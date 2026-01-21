@@ -11,4 +11,5 @@ open class BaseViewModel @Inject constructor() : ViewModel() {
     @Inject
     lateinit var baseRepo: BaseRepository
     lateinit var isError: LiveData<String>
+    lateinit var massage: LiveData<String>
 }
